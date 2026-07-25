@@ -9,10 +9,7 @@ const userSchema = new mongoose.Schema(
       trim: true, // Xóa khoảng trắng trước sau dữu liệu
       lowercase: true, // dữ liệu viết thường
     },
-    hashPassword: {
-      type: String,
-      required: true,
-    },
+    hashPassword: { type: String, required: true },
     email: {
       type: String,
       required: true,

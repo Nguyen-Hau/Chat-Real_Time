@@ -1,13 +1,13 @@
 import User from "../models/user.Model.js";
 import { hashPassword, comparePassword } from "../utils/bcrypt.js";
-import { geneteraAccessToken, geneteraRefreshToken } from "../utils/jwt.js";
+import { generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
 
 export const signup = async (request, response) => {
   try {
     const { username, password, email, firstName, lastName } = request.body;
     if (!username || !password || !email || !firstName || !lastName) {
       return response.status(400).json({
-        message: "Thông tin không chính xác. Vui lòng nhập lại!",
+        message: "Thông tin nhập bị thiếu. Vui lòng nhập lại!",
       });
     }
 
@@ -29,7 +29,7 @@ export const signup = async (request, response) => {
       displayName: `${firstName} ${lastName}`,
     });
     // return
-    return response.status(200).json({
+    return response.status(201).json({
       message: "Đăng ký thành công tài khoản!",
     });
   } catch (error) {
@@ -62,11 +62,16 @@ export const signin = async (request, response) => {
       });
     }
 
-    const token = await geneteraAccessToken(user);
+    // Tạo AccessToken giới hạn 15m
+    const accessToken = await generateAccessToken(user);
+
+    // Tạo RefreshToken giới hạn 1day sử dụng khi accessToken đã hệt hạn
+    const refreshToken = await generateRefreshToken(user);
 
     return response.status(200).json({
       message: "Đăng nhập thành công!",
-      token,
+      accessToken,
+      refreshToken,
       user: {
         id: user._id || user.id,
         username: user.username,
