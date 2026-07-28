@@ -1,7 +1,13 @@
+import crypto from "crypto";
+import jwt from "jsonwebtoken";
 import User from "../models/user.Model.js";
+import Session from "../models/session.Model.js";
 import { hashPassword, comparePassword } from "../utils/bcrypt.js";
-import { generateAccessToken, generateRefreshToken } from "../utils/jwt.js";
 
+const ACCESS_TOKEN_TTL = "15m";
+const REFRESH_TOKEN_TTL = 14 * 24 * 60 * 60 * 1000; // 14 DAY
+
+// Signup / Đăng ký
 export const signup = async (request, response) => {
   try {
     const { username, password, email, firstName, lastName } = request.body;
@@ -39,15 +45,16 @@ export const signup = async (request, response) => {
   }
 };
 
+// Signin / Đăng nhập
 export const signin = async (request, response) => {
   try {
     const { username, password } = request.body;
     if (!username || !password) {
-      return response
-        .status(400)
-        .json({ message: "Vui lòng nhập tài khoản hoặc mật khẩu!" });
+      return response.status(400).json({
+        message: "Vui lòng nhập tài khoản hoặc mật khẩu!",
+      });
     }
-    // Kiểm tra username
+    // 1 . Kiểm tra username
     const user = await User.findOne({ username });
     if (!user) {
       return response.status(404).json({
@@ -62,12 +69,32 @@ export const signin = async (request, response) => {
       });
     }
 
-    // Tạo AccessToken giới hạn 15m
-    const accessToken = await generateAccessToken(user);
+    // 2. Tạo AccessToken giới hạn 15m
+    const accessToken = jwt.sign(
+      { userId: user._id },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: ACCESS_TOKEN_TTL },
+    );
 
-    // Tạo RefreshToken giới hạn 1day sử dụng khi accessToken đã hệt hạn
-    const refreshToken = await generateRefreshToken(user);
+    // 3. Tạo RefreshToken giới hạn 14day sử dụng khi accessToken đã hệt hạn
+    const refreshToken = crypto.randomBytes(64).toString("hex");
 
+    // Tạo session mới để lưu RefreshToken
+    await Session.create({
+      userId: user._id,
+      refreshToken,
+      expiresAt: new Date(Date.now() + REFRESH_TOKEN_TTL),
+    });
+
+    // Trả refreshToken về Client qua cookie
+    response.cookie("refreshToken", refreshToken, {
+      httpOnly: true, // Ko thể truy cập bởi JVS
+      secure: true, // Đảm bảo gửi qua https
+      sameSite: "none", // BE & FE chạy trên 2 domain khác nhau
+      maxAge: REFRESH_TOKEN_TTL,
+    });
+
+    // 4.
     return response.status(200).json({
       message: "Đăng nhập thành công!",
       accessToken,
@@ -87,6 +114,5 @@ export const signin = async (request, response) => {
   }
 };
 
+// Logout/ Xóa refreshToken
 export const logout = async (request, response) => {};
-
-export const refresh = async (request, response) => {};

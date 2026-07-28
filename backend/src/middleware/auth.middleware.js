@@ -15,14 +15,10 @@ export const verifyRefreshToken = async (request, response, next) => {
 
   try {
     // Giải mã và verify token
-    const decoded = jwt.verify(
-      token,
-      process.env.JWT_SECRET ||
-        "khoa_luan_tot_nghiep_2026_nguyen_phuc_hau_2003",
-    );
+    const decoded = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
 
     // Gán userId vào request để Controller lấy ra sử dụng
-    request.userId = decoded.id;
+    request.userId = decoded.userId;
 
     // Tiếp tục chuyển tiếp cho controller xử lý
     next();

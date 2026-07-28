@@ -1,0 +1,31 @@
+frontend/
+├── index.html                  # Trang điều hướng chính hoặc trang Login/Landing
+└── pages/                      # Chứa tất cả tài nguyên giao diện
+    ├── html/                   # Chứa các file giao diện HTML chính/phụ
+    │   ├── login.html          # Trang đăng nhập / đăng ký
+    │   ├── chat.html           # Màn hình chính (Chat 1-1, Chat nhóm)
+    │   └── profile.html        # Màn hình xem/chỉnh sửa thông tin cá nhân
+    │
+    ├── css/                    # Chứa toàn bộ Style Sheets
+    │   ├── base/               # Cấu hình chung
+    │   │   ├── variables.css   # Biến CSS (màu chủ đạo, font-size, theme dark/light)
+    │   │   └── reset.css       # Reset CSS chuẩn cho các trình duyệt
+    │   ├── components/         # CSS chia nhỏ cho từng thành phần UI
+    │   │   ├── sidebar.css     # Style danh sách cuộc trò chuyện/bạn bè
+    │   │   ├── chat-box.css    # Style khung tin nhắn, khung nhập liệu
+    │   │   └── modal.css       # Style các hộp thoại pop-up (tạo nhóm, cài đặt)
+    │   └── pages/              # CSS riêng cho từng trang HTML
+    │       ├── login.css
+    │       └── chat.css
+    │
+    └── js/                     # Chứa toàn bộ Logic JavaScript
+        ├── config.js           # Cấu hình chung (API_URL, SOCKET_URL)
+        ├── services/           # Tầng tương tác dữ liệu (API & Socket)
+        │   ├── api.js          # Các hàm fetch API (Đăng nhập, lấy lịch sử tin nhắn...)
+        │   └── socket.js       # Quản lý kết nối Socket.IO (kết nối, gửi/nhận real-time)
+        ├── components/         # Hàm render/thao tác DOM thời gian thực
+        │   ├── message.js      # Render tin nhắn mới, hiệu ứng "Đang gõ..."
+        │   └── conversation.js # Render danh sách chat, đếm tin nhắn chưa đọc
+        └── pages/              # Script điều khiển logic chính từng trang
+            ├── login.js        # Logic validate form, gọi API login
+            └── chat.js         # Khởi tạo Socket, điều phối sự kiện màn hình chat
