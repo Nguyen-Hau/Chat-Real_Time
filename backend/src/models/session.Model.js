@@ -1,6 +1,5 @@
 import mongoose from "mongoose";
 
-// Lưu refresh vào database để quản lý riêng
 const sessionSchema = new mongoose.Schema(
   {
     userId: {
@@ -11,8 +10,8 @@ const sessionSchema = new mongoose.Schema(
     },
     refreshToken: {
       type: String,
-      required: true, // Bắt buộc phải có
-      unique: true, // Độc nhất
+      required: true,
+      unique: true,
     },
     expiresAt: {
       type: Date,
@@ -24,7 +23,6 @@ const sessionSchema = new mongoose.Schema(
   },
 );
 
-// cứ sau 14day sẽ lại xóa refreshToken
 sessionSchema.index({ expiresAt: 1 }, { expireAfterSeconds: 0 });
 
 const Session = mongoose.model("session", sessionSchema);

@@ -1,8 +1,8 @@
-import mongoose from "../config/mongodb.js";
+import mongoose from "mongoose";
 
 export const messageSchema = new mongoose.Schema(
   {},
   {
-    timestamp: true,
+    timestamps: true,
   },
 );

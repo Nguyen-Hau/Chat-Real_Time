@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="vi">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Đăng Nhập / Đăng Ký - Chat Real-Time</title>
+
+        <link rel="stylesheet" href="../css/base/variables.css">
+        <link rel="stylesheet" href="../css/base/reset.css">
+        <link rel="stylesheet" href="../css/pages/login.css">
+    </head>
+    <body>
+        <main class="auth-container">
+            <div class="auth-tabs">
+                <button id="tab-signin" class="" type="button">Đăng Nhập</button>
+                <button id="tab-signup" class="" type="button">Đăng Ký</button>
+            </div>
+            <!--Đăng Nhập-->
+            <form id="signin-form" class="auth-signin-form">
+                <h2>Đăng Nhập Bằng Tài Khoản</h2>
+                <!--Username-->
+                <div class="form-group">
+                    <label for="signin-username">Nhập Tên Tài Khoản</label>
+                    <input type="text" id="signin-username" name="username" placeholder="Nhập Tên Tài Khoản hoặc Email" required>
+                </div>
+                <!--Password-->
+                <div>
+                    <label for="signin-password">Nhập Mật Khẩu</label>
+                    <input type="password" id="signin-password" name="password" placeholder="Nhập Mật Khẩu" autocomplete="current-password" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Đăng Nhập</button>
+
+                <p class="auth-toggle-signin">
+                    Bạn chưa có tài khoản? <a href="#" id="link-to-signup">Đăng ký ngay</a>
+                </p>
+            </form>
+
+            <!--Đăng Ký-->
+            <form id="signup-form" class="auth-signup-form">
+                <h2>Tạo Tài Khoản Mới</h2>
+
+                <!--Username-->
+                <div class="form-group">
+                    <label for="signup-username">Nhập Tên Tài Khoản</label>
+                    <input type="text" id="signup-username" name="username" placeholder="Nhập Tên Tài Khoản" required>
+                </div>
+                <!--Full Name-->
+                <div class="form-fullname">
+                    <div class="sub-group">
+                        <label for="signup-firstname">Tên</label>
+                        <input type="text" id="signup-firstname" name="firstname" placeholder="Nhập Tên" required>
+                    </div>
+
+                    <div class="sub-group">
+                        <label for="signup-lastname">Họ</label>
+                        <input type="text" id="signup-lastname" name="lastname" placeholder="Nhập Họ" required>
+                    </div>
+                </div>
+
+                <!--Email-->
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" name="email" placeholder="Nhập Email" required>
+                </div>
+
+                <!--Phone-->
+                <div class="form-group">
+                    <label for="signup-phone">Số Điện Thoại</label>
+                    <input type="tel" id="signup-phone" placeholder="Nhập Số Điện Thoại" required>
+                </div>
+
+                <!--Password-->
+                <div class="form-group">
+                    <label for="signup-password">Mật khẩu</label>
+                    <input type="password" id="signup-password" placeholder="Nhập Mật Khẩu" autocomplete="new-password" required>
+
+                    <label for="signup-password-confirm">Xác nhận mật khẩu</label>
+                    <input type="password" id="signup-password-confirm" placeholder="Xác Nhận Lại Mật Khẩu" autocomplete="new-password" required>
+                </div>
+
+                <button type="submit" class="btn-submit">Đăng Ký</button>
+
+                <p class="auth-toggle-signup">
+                    Đã có tài khoản? <a href="#" id="link-to-signin">Đăng nhập tại đây</a>
+                </p>
+
+            </form>
+        </main>
+    </body>
+</html>

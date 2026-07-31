@@ -1,6 +1,6 @@
-import mongoose from "../config/mongodb.js";
+import mongoose from "mongoose";
 
-export const friendResquestSchema = new mongoose.Schema(
+export const friendRequestSchema = new mongoose.Schema(
   {
     from: {
       type: mongoose.Schema.Types.ObjectId,
@@ -17,7 +17,7 @@ export const friendResquestSchema = new mongoose.Schema(
       lowercase: true,
     },
   },
-  { timestamp: true },
+  { timestamps: true },
 );
 
 export const friendSchema = new mongoose.Schema(
@@ -38,6 +38,6 @@ export const friendSchema = new mongoose.Schema(
     },
   },
   {
-    timestamp: true,
+    timestamps: true,
   },
 );

@@ -1,6 +1,6 @@
 import express from "express";
 import {
-  verifyRefreshToken,
+  verifyAccessToken,
   requireRoles,
 } from "../middleware/auth.middleware.js";
 import { signup, signin, logout } from "../controllers/auth.Controller.js";
@@ -14,8 +14,8 @@ router.post("/signin", signin);
 router.post("/logout", logout);
 
 // userRouter
-router.get("/profile", verifyRefreshToken, profile); // Lấy thông tin người dùng
-router.get("/user", verifyRefreshToken, idUser); // Lấy danh sách người dùng
-router.delete("/user/:id", verifyRefreshToken, deleteUser); // Xóa người dùng
+router.get("/profile", verifyAccessToken, profile); // Lấy thông tin người dùng
+router.get("/user", verifyAccessToken, idUser); // Lấy danh sách người dùng
+router.delete("/user/:id", verifyAccessToken, deleteUser); // Xóa người dùng
 
 export default router;

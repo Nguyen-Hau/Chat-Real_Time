@@ -1,6 +1,6 @@
 import jwt from "jsonwebtoken";
 
-export const verifyRefreshToken = async (request, response, next) => {
+export const verifyAccessToken = async (request, response, next) => {
   // Lấy token từ header Authorization
   const authHeader = request.headers.authorization;
 

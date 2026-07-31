@@ -5,7 +5,7 @@ export const profile = async (request, response) => {
   try {
     const userId = request.userId;
 
-    const user = await User.findOne({ _id: userId }).select("-hashPassword");
+    const user = await User.findOne({ _id: userId }).select("-password");
     if (!user) {
       return response.status(400).json({
         message: "Không tìm thấy thông tin người dùng!",

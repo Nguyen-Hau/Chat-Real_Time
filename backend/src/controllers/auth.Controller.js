@@ -18,8 +18,8 @@ export const signup = async (request, response) => {
     }
 
     // Ktra user ton tại chưa
-    const duplicate = await User.findOne({ username });
-    if (duplicate) {
+    const user = await User.findOne({ username });
+    if (user) {
       return response.status(401).json({
         message: "Tài khoản này đã tồn tại! Vui lòng kiểm tra lại",
       });
@@ -30,7 +30,7 @@ export const signup = async (request, response) => {
     // tạo user mới
     await User.create({
       username,
-      hashPassword: hashPass,
+      password: hashPass,
       email,
       displayName: `${firstName} ${lastName}`,
     });
@@ -62,7 +62,7 @@ export const signin = async (request, response) => {
       });
     }
     // Kiểm tra password
-    const isMatch = await comparePassword(password, user.hashPassword);
+    const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
       return response.status(400).json({
         message: "Tài khoản hoặc mật khẩu không chính xác!",
@@ -86,7 +86,7 @@ export const signin = async (request, response) => {
       expiresAt: new Date(Date.now() + REFRESH_TOKEN_TTL),
     });
 
-    // Trả refreshToken về Client qua cookie
+    // Trả refreshToken về Client qua cookie // Tạo cookie
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true, // Ko thể truy cập bởi JVS
       secure: true, // Đảm bảo gửi qua https
@@ -115,4 +115,25 @@ export const signin = async (request, response) => {
 };
 
 // Logout/ Xóa refreshToken
-export const logout = async (request, response) => {};
+export const logout = async (request, response) => {
+  try {
+    // 1. lấy refreshToken từ cookie của resquest
+    const refreshToken = request.cookies?.refreshToken;
+    //2. Nếu có refreshToken trong database thì thực hiện delete
+    if (refreshToken) {
+      await Session.deleteOne({ refreshToken });
+    }
+    // 3. cũng delete refreshToken trên client
+    response.clearCookie("refreshToken", {
+      httpOnly: true,
+      secure: true,
+      sameSite: "none",
+    });
+
+    return response.status(200).json({ message: "Đăng xuất thành công" });
+  } catch (error) {
+    return response.status(500).json({
+      message: "Lỗi hệ thống khi đăng xuất: " + error.message,
+    });
+  }
+};

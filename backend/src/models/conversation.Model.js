@@ -1,9 +1,9 @@
-import mongoose from "../config/mongodb.js";
+import mongoose from "mongoose";
 
 export const conversationSchema = new mongoose.Schema(
   {
     participant: {
-      type: mongoose.Schema.Types.Object,
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
       trim: true,
@@ -11,26 +11,28 @@ export const conversationSchema = new mongoose.Schema(
     },
     type: {
       type: String,
-      enum: ["diret", "group"],
+      enum: ["direct", "group"],
       required: true,
     },
     group: {
-      name: string,
-      createBy: {
-        type: mongoose.Schema.Types.Object,
+      name: String,
+      createdBy: {
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
     },
     lastMessage: {
-      content: mongoose.Schema.Types.Object,
+      content: mongoose.Schema.Types.ObjectId,
       sender: {
-        type: mongoose.Schema.Types.Object,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "User",
       },
-      createAt: { type: Data },
+      createdAt: {
+        type: Date,
+      },
     },
   },
   {
-    timestamp: true,
+    timestamps: true,
   },
 );
