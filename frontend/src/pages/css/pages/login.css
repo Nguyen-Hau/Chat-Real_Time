@@ -1,0 +1,38 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Thẻ bao quanh toàn bộ khung đăng nhập */
+.auth-container {
+    display: flex;
+
+}
+
+/* Chuyển đổi giữa Signin & Signup */
+.auth-toggle-signin, .auth-toggle-signup {
+
+}
+
+/* Nút Submit */
+.btn-submit {
+
+}
+
+/* Cột trái: Form */
+
+/* Cột phải: Ảnh minh họa */
+
+/* Footer terms */
+
+/* Ẩn bớt 1 form mặc định */
+/*
+.auth-signup-form {
+    display: none;
+}
+*/

@@ -3,14 +3,7 @@ import User from "../models/user.Model.js";
 // Get getfile
 export const profile = async (request, response) => {
   try {
-    const userId = request.userId;
-
-    const user = await User.findOne({ _id: userId }).select("-password");
-    if (!user) {
-      return response.status(400).json({
-        message: "Không tìm thấy thông tin người dùng!",
-      });
-    }
+    const user = request.userId;
 
     return response.status(200).json({
       message: "Lấy thông tin Profile thành công!",
