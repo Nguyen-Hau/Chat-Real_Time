@@ -89,8 +89,8 @@ export const signin = async (request, response) => {
     // Trả refreshToken về Client qua cookie // Tạo cookie
     response.cookie("refreshToken", refreshToken, {
       httpOnly: true, // Ko thể truy cập bởi JVS
-      secure: true, // Đảm bảo gửi qua https
-      sameSite: "none", // BE & FE chạy trên 2 domain khác nhau
+      secure: false, // Đảm bảo gửi qua https
+      sameSite: "lax", // BE & FE chạy trên 2 domain khác nhau
       maxAge: REFRESH_TOKEN_TTL,
     });
 
@@ -127,7 +127,7 @@ export const logout = async (request, response) => {
     response.clearCookie("refreshToken", {
       httpOnly: true,
       secure: true,
-      sameSite: "none",
+      sameSite: "lax",
     });
 
     return response.status(200).json({ message: "Đăng xuất thành công" });

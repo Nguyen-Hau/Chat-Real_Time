@@ -46,4 +46,4 @@ export const verifyAccessToken = async (request, response, next) => {
   }
 };
 
-export const requireRoles = async (request, response) => {};
+// export const requireRoles = async (request, response) => {};

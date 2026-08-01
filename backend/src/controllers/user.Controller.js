@@ -1,5 +1,3 @@
-import User from "../models/user.Model.js";
-
 // Get getfile
 export const profile = async (request, response) => {
   try {

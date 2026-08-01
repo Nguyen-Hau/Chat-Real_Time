@@ -1,8 +1,5 @@
 import express from "express";
-import {
-  verifyAccessToken,
-  requireRoles,
-} from "../middleware/auth.middleware.js";
+import { verifyAccessToken } from "../middleware/auth.middleware.js";
 import { signup, signin, logout } from "../controllers/auth.Controller.js";
 import { deleteUser, profile, idUser } from "../controllers/user.Controller.js";
 
