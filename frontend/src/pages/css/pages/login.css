@@ -30,9 +30,19 @@ body {
 
 /* Footer terms */
 
-/* Ẩn bớt 1 form mặc định */
+
+/* Ẩn form signup mặc định, chỉ hiện signin */
 /*
 .auth-signup-form {
-    display: none;
+  display: none;
 }
-*/
+
+/* Class .hidden dùng cho JS toggle */
+/*
+.hidden {
+  display: none !important;
+}
+/* Thông báo lỗi */
+/*
+.form-message.error   { color: #e74c3c; font-size: 0.875rem; }
+.form-message.success { color: #2ecc71; font-size: 0.875rem; }

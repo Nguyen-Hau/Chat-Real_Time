@@ -1,13 +1,14 @@
 import apiClient from "../config.js";
 
 export const authService = {
-  signup: async (username, password, email, firstName, lastName) => {
+  signup: async (username, password, email, firstName, lastName, phone) => {
     return await apiClient.post("/auth/signup", {
       username,
       password,
       email,
       firstName,
       lastName,
+      phone,
     });
   },
   signin: async (username, password) => {

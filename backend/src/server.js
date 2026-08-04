@@ -7,7 +7,9 @@ import { connectionDB } from "./config/mongodb.js";
 import authRoute from "./routers/auth.Routes.js";
 
 const app = express();
+app.use(cookieParser());
 
+// B1. Cấu hình CORS trên Backend
 // Cho phép Vite FE gọi API
 app.use(
   cors({

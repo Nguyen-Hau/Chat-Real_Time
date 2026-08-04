@@ -98,7 +98,6 @@ export const signin = async (request, response) => {
     return response.status(200).json({
       message: "Đăng nhập thành công!",
       accessToken,
-      refreshToken,
       user: {
         id: user._id || user.id,
         username: user.username,
