@@ -1,17 +1,18 @@
 import axios from "axios";
 export const API_BASE_URL = "http://localhost:5001/api";
 
+// 1. Quản lý AccessToken trong bộ nhớ RAM
 let inMemoryToken = null;
-
+// Ghi
 export const setToken = (token) => {
   inMemoryToken = token;
 };
-
+// Đọc
 export const getToken = () => {
   return inMemoryToken;
 };
 
-// B2.
+// 2. Khởi tạo Axios Instance
 // Cấu trúc: axios.create() — tạo instance riêng với config mặc định
 const apiClient = axios.create({
   baseURL: API_BASE_URL, // Địa chỉ gốc của BE
@@ -21,7 +22,7 @@ const apiClient = axios.create({
   withCredentials: true, // Tự động gửi Cookie trong mỗi request
 });
 
-// interceptors.request.use() → chặn request TRƯỚC khi gửi đi
+// 3. Request Interceptor: Đính kèm Token vào Header trước khi gửi request
 apiClient.interceptors.request.use((config) => {
   const token = getToken();
   if (token) {

@@ -136,3 +136,47 @@ export const logout = async (request, response) => {
     });
   }
 };
+
+// Cấp lại Token
+export const refreshToken = async (request, response) => {
+  try {
+    const refreshToken = request.cookies?.refreshToken;
+
+    if (!refreshToken) {
+      return response.status(401).json({
+        success: false,
+        message: "Bạn chưa đăng nhập hoặc không tìm thấy Refresh Token!",
+      });
+    }
+
+    // 2. Tìm Session trong Database
+    const session = await Session.findOne({ refreshToken });
+
+    if (!session || new Date(session.expiresAt).getTime() <= Date.now()) {
+      return response.status(403).json({
+        success: false,
+        message:
+          "Phiên đăng nhập không hợp lệ hoặc đã hết hạn. Vui lòng đăng nhập lại!",
+      });
+    }
+
+    // 4. Nếu hợp lệ -> Tạo AccessToken mới (15m)
+    const accessToken = jwt.sign(
+      { userId: session.userId },
+      process.env.ACCESS_TOKEN_SECRET,
+      { expiresIn: ACCESS_TOKEN_TTL },
+    );
+
+    // 5. Trả AccessToken mới về cho Client
+    return response.status(200).json({
+      success: true,
+      message: "Cấp lại AccessToken thành công!",
+      accessToken,
+    });
+  } catch (error) {
+    return response.status(500).json({
+      success: false,
+      message: "Lỗi hệ thống: " + error.message,
+    });
+  }
+};

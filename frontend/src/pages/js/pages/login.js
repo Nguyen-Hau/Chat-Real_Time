@@ -1,3 +1,4 @@
+import { getToken, setToken } from "../config.js";
 import { authService } from "../services/auth.service.js";
 
 const showToSignin = document.getElementById("show-to-signin");
@@ -40,7 +41,7 @@ signinForm.addEventListener("submit", async (event) => {
     const finalToken = accessToken || token;
 
     if (finalToken) {
-      localStorage.setItem("accessToken", finalToken);
+      setToken(finalToken);
 
       if (user) {
         localStorage.setItem("currentUser", JSON.stringify(user));

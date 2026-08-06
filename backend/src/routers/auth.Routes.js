@@ -1,6 +1,11 @@
 import express from "express";
 import { verifyAccessToken } from "../middleware/auth.middleware.js";
-import { signup, signin, logout } from "../controllers/auth.Controller.js";
+import {
+  signup,
+  signin,
+  logout,
+  refreshToken,
+} from "../controllers/auth.Controller.js";
 import { deleteUser, profile, idUser } from "../controllers/user.Controller.js";
 
 const router = express.Router();
@@ -9,6 +14,7 @@ const router = express.Router();
 router.post("/signup", signup); // Thêm thông tin người dùng
 router.post("/signin", signin);
 router.post("/logout", logout);
+router.post("/refresh-token", refreshToken);
 
 // userRouter
 router.get("/profile", verifyAccessToken, profile); // Lấy thông tin người dùng
