@@ -1,38 +1,38 @@
 <!DOCTYPE html>
 <html lang="vi">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Đăng Nhập / Đăng Ký - Chat Real-Time</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Nhập / Đăng Ký - Chat Real-Time</title>
 
-        <link rel="stylesheet" href="../css/base/variables.css">
-        <link rel="stylesheet" href="../css/base/reset.css">
-        <link rel="stylesheet" href="../css/pages/login.css">
-    </head>
-    <body>
-        <main class="auth-container">
-
-            <!-- CỘT BÊN TRÁI: -->
-            <div class="auth-left">
+    <link rel="stylesheet" href="../css/theme.css">
+    <link rel="stylesheet" href="../css/reset.css">
+    <link rel="stylesheet" href="../css/login.css">
+</head>
+<body>
+    <main class="auth-container">
+            <!-- FORM ĐĂNG NHẬP-->
+        <form id="signin-form" class="auth-card-tab">
+            <div class="auth-form-content">
                 <div class="auth-header">
-                    <img src="/frontend/src/assets/logos/logo.png" alt="Logo">
-                    <h1 id="auth-title">Chào mừng quay lại</h1>
-                    <p id="auth-subtitle">Đăng nhập vào tài khoản Chat Real-Time của bạn</p>
+                    <img src="/src/assets/logos/logo.png" alt="Logo" class="auth-logo">
+                    <h1 id="auth-signin-title">Chào mừng quay lại!</h1>
+                    <p id="auth-signin-subtitle">Đăng nhập vào tài khoản Chat Real-Time của bạn!</p>
                 </div>
 
-                <!-- Form Đăng Nhập-->
-                <form id="signin-form" class="auth-signin-form">
-                    <h2>Đăng Nhập Bằng Tài Khoản</h2>
-                    <!--Username-->
+                <div class="form-group-left">
+                        <!--Username-->
                     <div class="form-group">
-                        <label for="signin-username">Nhập Tên Tài Khoản hoặc Email</label>
+                        <label for="signin-username">Tài Khoản hoặc Email</label>
                         <input type="text" id="signin-username" name="username" placeholder="Nhập Tên Tài Khoản hoặc Email" required>
+                        <small class="form-message"></small>
                     </div>
 
-                    <!--Password-->
+                        <!--Password-->
                     <div class="form-group">
-                        <label for="signin-password">Nhập Mật Khẩu</label>
+                        <label for="signin-password">Mật Khẩu</label>
                         <input type="password" id="signin-password" name="password" placeholder="Nhập Mật Khẩu" autocomplete="current-password" required>
+                        <small class="form-message"></small>
                     </div>
 
                     <button type="submit" class="btn-submit">Đăng Nhập</button>
@@ -40,51 +40,70 @@
                     <p class="auth-toggle-signin">
                         Bạn chưa có tài khoản? <a href="#" id="show-to-signup">Đăng ký ngay</a>
                     </p>
-                </form>
+                </div>
+            </div>
 
-                <!--Form Đăng Ký-->
-                <form id="signup-form" class="auth-signup-form">
-                    <h2>Tạo Tài Khoản Mới</h2>
+            <div class="auth-right">
+                <img src="/src/assets/image/signup_bg.jpg" alt="Sign In Illustration">
+            </div>
+        </form>
 
-                    <!--Username-->
-                    <div class="form-group">
-                        <label for="signup-username">Nhập Tên Tài Khoản</label>
-                        <input type="text" id="signup-username" name="username" placeholder="Nhập Tên Tài Khoản" required>
-                    </div>
+            <!--FORM ĐĂNG KÝ-->
+        <form id="signup-form" class="auth-card-tab hidden">
+            <div class="auth-form-content">
+                <div class="auth-header">
+                    <img src="/src/assets/logos/logo.png" alt="Logo" class="auth-logo">
+                    <h1 id="auth-signup-title">Tạo tài khoản Chat</h1>
+                    <p id="auth-signup-subtitle">Chào mừng bạn! Đăng ký để bắt đầu!</p>
+                </div>
 
-                    <!--Full Name-->
+                <div class="form-group-left">
+                        <!--Full Name-->
                     <div class="form-fullname">
-                        <div class="sub-group">
-                            <label for="signup-firstname">Tên</label>
-                            <input type="text" id="signup-firstname" name="firstname" placeholder="Nhập Tên" required>
-                        </div>
-
                         <div class="sub-group">
                             <label for="signup-lastname">Họ</label>
                             <input type="text" id="signup-lastname" name="lastname" placeholder="Nhập Họ" required>
+                            <small class="form-message"></small>
+                        </div>
+
+                        <div class="sub-group">
+                            <label for="signup-firstname">Tên</label>
+                            <input type="text" id="signup-firstname" name="firstname" placeholder="Nhập Tên" required>
+                            <small class="form-message"></small>
                         </div>
                     </div>
 
-                    <!--Email-->
+                        <!--Username-->
+                    <div class="form-group">
+                        <label for="signup-username">Nhập Tên Tài Khoản</label>
+                            <input type="text" id="signup-username" name="username" placeholder="Nhập Tên Tài Khoản" required>
+                        <small class="form-message"></small>
+                    </div>
+
+                        <!--Email-->
                     <div class="form-group">
                         <label for="signup-email">Email</label>
                         <input type="email" id="signup-email" name="email" placeholder="Nhập Email" required>
+                        <small class="form-message"></small>
                     </div>
 
-                    <!--Phone-->
+                        <!--Phone-->
                     <div class="form-group">
                         <label for="signup-phone">Số Điện Thoại</label>
                         <input type="tel" id="signup-phone" placeholder="Nhập Số Điện Thoại" required>
+                        <small class="form-message"></small>
                     </div>
 
-                    <!--Password-->
+                        <!--Password-->
                     <div class="form-group">
                         <label for="signup-password">Mật khẩu</label>
                         <input type="password" id="signup-password" placeholder="Nhập Mật Khẩu" autocomplete="new-password" required>
+                        <small class="form-message"></small>
                     </div>
                     <div class="form-group">
-                        <label for="signup-password-confirm">Xác nhận mật khẩu</label>
-                        <input type="password" id="signup-password-confirm" placeholder="Xác Nhận Lại Mật Khẩu" autocomplete="new-password" required>
+                        <label for="signin-password-confirm">Nhập lại Mật khẩu</label>
+                        <input type="password" id="signup-password-confirm" placeholder="Xác Nhận Mật Khẩu" autocomplete="new-password" required>
+                        <small class="form-message"></small>
                     </div>
 
                     <button type="submit" class="btn-submit">Đăng Ký</button>
@@ -92,20 +111,22 @@
                     <p class="auth-toggle-signup">
                         Đã có tài khoản? <a href="#" id="show-to-signin">Đăng nhập tại đây</a>
                     </p>
-                </form>
+                </div>
+
             </div>
 
 
-            <!-- CỘT BÊN PHẢI: Hình ảnh minh họa-->
             <div class="auth-right">
-                <img src="/frontend/src/assets/image/chat_real_time.jpg" alt="Chat_Real-Time">
+                <img src="/src/assets/image/signup_bg_2.jpg" alt="Sign Up Illustration">
             </div>
-        </main>
-        <!--Footer Terms-->
-        <footer class="auth-footer">
-            Bằng cách tiếp tục, bạn đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo mật </a> của chúng tôi.
-        </footer>
+        </form>
+    </main>
 
-        <script type="module" src="../js/pages/login.js"></script>
-    </body>
+    <!--Footer Terms-->
+    <footer class="auth-footer">
+        Bằng cách tiếp tục, bạn đồng ý với <a href="#">Điều khoản dịch vụ</a> và <a href="#">Chính sách bảo mật </a> của chúng tôi.
+    </footer>
+
+    <script type="module" src="/src/pages/js/pages/login.js"></script>
+</body>
 </html>

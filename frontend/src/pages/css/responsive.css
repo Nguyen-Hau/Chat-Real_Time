@@ -1,0 +1,19 @@
+/* *=================
+    Media Queries
+=================* */
+
+
+/* *=================
+    Desktop
+=================* */
+@media (max-width: 1536px) {
+    .container {
+        max-width: 1440px;
+    }
+}
+
+@media (max-width: 1440px) {
+    .container {
+        max-width: 1028px;
+    }
+}

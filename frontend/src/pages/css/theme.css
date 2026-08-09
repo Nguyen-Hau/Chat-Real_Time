@@ -1,0 +1,86 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+:root {
+    --primary-color: #6c2bd9;       /* Màu tím chủ đạo */
+    --primary-hover: #5b21b6;       /* Màu tím đậm hơn khi hover button */
+    --bg-gradient: linear-gradient(135deg, #f3f0ff 0%, #e0e7ff 100%);
+    --card-bg: #ffffff;
+    --text-color: #1f2937;
+    --text-muted: #6b7280;
+    --border-color: #e5e7eb;
+    --input-bg: #f9fafb;
+    --radius-lg: 16px;
+    --radius-sm: 8px;
+
+    /*================================= 
+        FONTS -  Sử dụng Scale 1.125
+    =================================*/
+    --h1-font-size: 2rem;       /* 32px */
+    --h1-line-height: 2.25rem; /* 36px */
+
+    --h2-font-size: 1.6rem; /* 26px */
+    --h2-line-height: 2rem;/* 32px */
+
+    
+    --h3-font-size: 1.266rem; /* 20px */
+    --h3-line-height: 1.5rem;/* 24px */
+
+    
+    --h4-font-size: 1.125rem;/* 18px */
+    --h4-line-height: 1.5rem;/* 16px */
+
+    
+    --p-font-size: 1rem;    /* 16px */
+    --p-line-height: 1.5rem;/* 24px */
+    --p-letter-spacing: 0.025rem;
+
+    
+    --caption-font-size: 0.875rem; /* 12px */
+    --caption-line-height: 1rem; /* 16px */
+}
+
+* {
+    box-sizing: border-box;
+}

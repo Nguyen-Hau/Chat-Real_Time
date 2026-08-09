@@ -1,39 +1,44 @@
-import { getToken, setToken } from "../config.js";
+import { getToken, setToken } from "../axios.js";
 import { authService } from "../services/auth.service.js";
+
+// 0. Tự động chuyển hướng sang chat.html nếu đã đăng nhập từ trước
+const currentUser = localStorage.getItem("currentUser");
+if (currentUser) {
+  window.location.href = "chat.html";
+}
 
 const showToSignin = document.getElementById("show-to-signin");
 const showToSignup = document.getElementById("show-to-signup");
 const signinForm = document.getElementById("signin-form");
 const signupForm = document.getElementById("signup-form");
-const authTitle = document.getElementById("auth-title");
-const authSubtitle = document.getElementById("auth-subtitle");
 
 // 1. Chuyển đổi qua lại giữa Form Đăng Nhập và Đăng Ký
 showToSignup.addEventListener("click", (event) => {
   event.preventDefault();
-  signinForm.style.display = "none";
-  signupForm.style.display = "block";
-
-  if (authTitle) {
-    authTitle.innerText = "Tạo tài khoản mới";
-  }
-
-  if (authSubtitle) {
-    authSubtitle.innerText = "Đăng ký để bắt đầu trò chuyện";
-  }
+  signinForm.classList.add("hidden");
+  signupForm.classList.remove("hidden");
 });
 
 showToSignin.addEventListener("click", (event) => {
   event.preventDefault();
-  signupForm.style.display = "none";
-  signinForm.style.display = "block";
+  signupForm.classList.add("hidden");
+  signinForm.classList.remove("hidden");
 });
 
-// 2. Xử lý Submit Form Đăng Nhập
+// 2. Hàm hiện thị lỗi
+function showError(inputElement, message) {
+  const formGroup = inputElement.parentElement;
+  const errorElement = formGroup.querySelector(".form-message");
+  formGroup.classList.add("invalid");
+  if (errorElement) {
+    errorElement.innerText = message;
+  }
+}
+// 3.Xử lý Submit Form Đăng Nhập
 signinForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const username = document.getElementById("username").value;
-  const password = document.getElementById("password").value;
+  const username = document.getElementById("signin-username").value;
+  const password = document.getElementById("signin-password").value;
 
   try {
     const response = await authService.signin(username, password);
@@ -52,15 +57,18 @@ signinForm.addEventListener("submit", async (event) => {
     }
   } catch (error) {
     console.error("Lỗi đăng nhập: ", error);
+    const message =
+      error.response?.data?.message || "Đăng nhập thất bại! Vui lòng thử lại!";
+    alert(message);
   }
 });
 
 // 3. Xử lý Submit Form Đăng Ký
 signupForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  const username = document.getElementById("signup-username").value;
   const firstName = document.getElementById("signup-firstname").value;
   const lastName = document.getElementById("signup-lastname").value;
+  const username = document.getElementById("signup-username").value;
   const email = document.getElementById("signup-email").value;
   const phone = document.getElementById("signup-phone").value;
   const password = document.getElementById("signup-password").value;
@@ -88,5 +96,8 @@ signupForm.addEventListener("submit", async (event) => {
     showToSignin.click();
   } catch (error) {
     console.error("Lỗi đăng ký: ", error);
+    const message =
+      error.response?.data?.message || "Đăng ký thất bại! Vui lòng thử lại!";
+    alert(message);
   }
 });

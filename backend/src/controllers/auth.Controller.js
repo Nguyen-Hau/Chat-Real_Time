@@ -10,8 +10,9 @@ const REFRESH_TOKEN_TTL = 14 * 24 * 60 * 60 * 1000; // 14 DAY
 // Signup / Đăng ký
 export const signup = async (request, response) => {
   try {
-    const { username, password, email, firstName, lastName } = request.body;
-    if (!username || !password || !email || !firstName || !lastName) {
+    const { username, password, email, firstName, lastName, phone } =
+      request.body;
+    if (!username || !password || !email || !firstName || !lastName || !phone) {
       return response.status(400).json({
         message: "Thông tin nhập bị thiếu. Vui lòng nhập lại!",
       });
@@ -33,6 +34,7 @@ export const signup = async (request, response) => {
       password: hashPass,
       email,
       displayName: `${firstName} ${lastName}`,
+      phone,
     });
     // return
     return response.status(201).json({
@@ -48,14 +50,17 @@ export const signup = async (request, response) => {
 // Signin / Đăng nhập
 export const signin = async (request, response) => {
   try {
-    const { username, password } = request.body;
-    if (!username || !password) {
+    const { username, email, password } = request.body;
+    if ((!username && !email) || !password) {
       return response.status(400).json({
         message: "Vui lòng nhập tài khoản hoặc mật khẩu!",
       });
     }
     // 1 . Kiểm tra username
-    const user = await User.findOne({ username });
+    const user = await User.findOne({
+      $or: [{ username: username }, { email: username }],
+    });
+
     if (!user) {
       return response.status(404).json({
         message: "Tài khoản và mật khẩu không chính xác!",

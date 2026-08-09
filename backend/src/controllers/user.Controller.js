@@ -8,6 +8,7 @@ export const profile = async (request, response) => {
       user,
     });
   } catch (error) {
+    console.error("Lỗi khi gọi Profile: ", error);
     return response.status(500).json({
       message: "Lỗi lấy Profile:" + error.message,
     });

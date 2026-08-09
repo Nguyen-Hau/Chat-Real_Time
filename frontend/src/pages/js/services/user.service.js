@@ -1,4 +1,4 @@
-import apiClient from "../config.js";
+import apiClient from "../axios.js";
 export const userService = {
   getProfile: async () => {
     return await apiClient.get("/auth/profile");

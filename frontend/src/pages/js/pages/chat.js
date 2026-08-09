@@ -1,5 +1,5 @@
 import { authService } from "../services/auth.service.js";
-import { setToken, getToken } from "../config";
+import { setToken, getToken } from "../axios.js";
 
 // Hàm khởi tạo ứng dụng Chat
 async function initChatApp() {

@@ -1,0 +1,166 @@
+@import 'theme.css';
+@import './theme.css';
+
+* {
+  font-family: 'Inter', sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  /*Căm giữa */
+  justify-content: center;
+  align-items: center;
+  /*Nền gradient tím chuyển màu sang trọng*/
+  background: linear-gradient(135deg, #5b21b6 0%, #f3e8ff 50%, #6c2bd9 150%);
+  background-size: 400% 400%;
+  animation: gradientMove 10s ease infinite;
+  /**/
+  min-height: 100vh;
+}
+
+.auth-container {
+  display: flex;
+  max-width: 850px;
+  margin: 0 auto;
+  margin-bottom: 18px;
+}
+
+.auth-form-content {
+  flex: 1;
+  width: 100%;
+  padding: 40px 36px;
+}
+
+/*-------- SignIn/SignUp --------*/
+.auth-card-tab {
+  display: flex;
+  background-color: #ffffff;
+  border-radius: 8px;
+}
+
+.auth-card-tab hidden {
+  
+}
+
+/*-------- ABOUT --------*/
+.auth-header {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 12px;
+  margin-bottom: 24px; /* Giãn khoảng cách giữa header và form */
+}
+
+.auth-header h1 {
+  font-size: var(--h1-font-size);
+  line-height: var(--h1-line-height);
+  font-weight: bold;
+
+}
+
+.auth-header p {
+  font-size: var(--p-font-size);
+  line-height: var(--p-line-height);
+  font-weight: 200;
+  margin-bottom: 8px;
+}
+
+/*======= GROUP FORM =======*/
+.form-group-left {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+
+.form-group {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.form-group input,
+.sub-group input {
+  width: 100%;
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.sub-group input:focus {
+  border-color: rgba(81, 84, 241, 0.5);
+  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+}
+
+.form-fullname {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+}
+
+/*====== LOGO =======*/
+.auth-logo {
+  width: 84px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+/*======= SUBMIT =======*/
+.btn-submit {
+  width: 100%;
+  color: #ffffff;
+  padding: 8px;
+  background-color: var(--primary-color);
+  border-radius: 50px;
+  border: 1px solid transparent;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+/*======= IMGAE =======*/
+.auth-right {
+  flex: 1;
+}
+
+.auth-right img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0 8px 8px 0;
+  display: block;
+  overflow: hidden;
+  transition: all 0.4s ease-in-out;
+}
+
+/*======= AUTH FOOTER ========*/
+.auth-footer {
+
+}
+
+.hidden {
+  display: none !important;
+}
+
+/*  chuyển động màu */
+@keyframes gradientMove {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}

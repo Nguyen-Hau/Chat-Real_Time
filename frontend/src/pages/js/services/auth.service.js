@@ -1,4 +1,4 @@
-import apiClient from "../config.js";
+import apiClient from "../axios.js";
 
 export const authService = {
   signup: async (username, password, email, firstName, lastName, phone) => {

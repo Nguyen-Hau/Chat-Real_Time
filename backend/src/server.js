@@ -14,13 +14,14 @@ app.use(cookieParser());
 app.use(
   cors({
     origin: "http://localhost:5173", // Cho phép Frontend Vite kết nối
-    credentials: true,
+    credentials: true, // cho phép trình duyệt gửi cookie, cần cho refreshToken
   }),
 );
 
 // middleware
 app.use(express.json()); // giúp express hiểu và đọc được request.body dưới dạng JSON
 app.use(cookieParser());
+
 // public Router
 app.use("/api/auth", authRoute);
 
