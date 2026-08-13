@@ -33,7 +33,7 @@ frontend/
 
 
 File Tree: chat_real_time
-Generated on: 8/1/2026, 4:00:00 PM
+Generated on: 8/13/2026, 10:41:54 AM
 Root path: d:\KHÓA LUẬN TỐT NGHIỆP\chat_real_time
 
 ────────────────────────────────────────────────────────────────────────────────
@@ -66,22 +66,22 @@ Root path: d:\KHÓA LUẬN TỐT NGHIỆP\chat_real_time
 │   │   ├── 📁 assets/
 │   │   │   ├── 📁 avatar/
 │   │   │   ├── 📁 image/
-│   │   │   │   └── 🖼️ chat_real_time.jpg
+│   │   │   │   ├── 🖼️ profile.jpg
+│   │   │   │   ├── 🖼️ signin_bg.jpg
+│   │   │   │   ├── 🖼️ signin_bg.png
+│   │   │   │   └── 🖼️ signup_bg_2.jpg
 │   │   │   └── 📁 logos/
 │   │   │       └── 🖼️ logo.png
 │   │   └── 📁 pages/
 │   │       ├── 📁 css/
-│   │       │   ├── 📁 base/
-│   │       │   │   ├── 🎨 reset.css
-│   │       │   │   └── 🎨 variables.css
-│   │       │   ├── 📁 components/
-│   │       │   │   ├── 🎨 chat-box.css
-│   │       │   │   ├── 🎨 modal.css
-│   │       │   │   └── 🎨 sidebar.css
-│   │       │   └── 📁 pages/
-│   │       │       ├── 🎨 chat.css
-│   │       │       ├── 🎨 index.css
-│   │       │       └── 🎨 login.css
+│   │       │   ├── 🎨 chat-box.css
+│   │       │   ├── 🎨 chat.css
+│   │       │   ├── 🎨 index.css
+│   │       │   ├── 🎨 login.css
+│   │       │   ├── 🎨 modal.css
+│   │       │   ├── 🎨 responsive.css
+│   │       │   ├── 🎨 sidebar.css
+│   │       │   └── 🎨 theme.css
 │   │       ├── 📁 html/
 │   │       │   ├── 🌐 chat.html
 │   │       │   ├── 🌐 index.html
@@ -92,12 +92,17 @@ Root path: d:\KHÓA LUẬN TỐT NGHIỆP\chat_real_time
 │   │           │   ├── 📄 chat.js
 │   │           │   ├── 📄 index.js
 │   │           │   ├── 📄 login.js
-│   │           │   └── 📄 profile.js
+│   │           │   └── 📄 logout.js
 │   │           ├── 📁 services/
+│   │           │   ├── 📄 auth.service.js
+│   │           │   └── 📄 user.service.js
+│   │           ├── 📁 utils/
+│   │           ├── 📄 axios.js
 │   │           └── 📄 config.js
 │   ├── ⚙️ package-lock.json
 │   ├── ⚙️ package.json
-│   └── 📄 tree
+│   ├── 📄 tree
+│   └── 📄 vite.config.js
 ├── ⚙️ package-lock.json
 └── ⚙️ package.json
 

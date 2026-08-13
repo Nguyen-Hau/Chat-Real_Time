@@ -1,0 +1,20 @@
+.btn-logout {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 16px;
+  width: 100%;
+  border: none;
+  border-radius: 8px;
+  background-color: transparent;
+  color: #ef4444; /* Màu đỏ hiện đại */
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-logout:hover {
+  background-color: rgba(239, 68, 68, 0.1);
+  transform: translateX(2px);
+}

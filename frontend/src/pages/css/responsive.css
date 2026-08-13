@@ -17,3 +17,49 @@
         max-width: 1028px;
     }
 }
+
+/* *=================
+    Laptop & Tablet
+=================* */
+@media (max-width: 1280px) {
+    .container {
+        max-width: 1024px;
+    }
+
+    .auth-card-tab {
+        flex-direction: column;
+    }
+
+    /*Ẩn phần ảnh minh họa bên phải để nhường không gian cho Form */
+    .auth-right {
+        display: none;
+    }
+}
+
+
+/* *=================
+    Phone
+=================* */
+@media (max-width: 640px) {
+    :root {
+        font-size: 14px;
+        line-height: 16px;
+    }
+
+    .auth-container {
+        max-width: 90%;
+        padding: 10px auto;
+    }
+
+    .auth-header h1 {
+        font-size: 2rem;
+    }
+    
+    .auth-header p {
+        font-size: 1rem;
+    }
+
+    .btn-submit {
+        padding: 10px;
+    }
+}

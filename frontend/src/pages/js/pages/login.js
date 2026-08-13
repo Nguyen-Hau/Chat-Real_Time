@@ -12,7 +12,7 @@ const showToSignup = document.getElementById("show-to-signup");
 const signinForm = document.getElementById("signin-form");
 const signupForm = document.getElementById("signup-form");
 
-// 1. Chuyển đổi qua lại giữa Form Đăng Nhập và Đăng Ký
+// 2. Chuyển đổi qua lại giữa Form Đăng Nhập và Đăng Ký
 showToSignup.addEventListener("click", (event) => {
   event.preventDefault();
   signinForm.classList.add("hidden");
@@ -25,16 +25,18 @@ showToSignin.addEventListener("click", (event) => {
   signinForm.classList.remove("hidden");
 });
 
-// 2. Hàm hiện thị lỗi
-function showError(inputElement, message) {
+// 3. Hàm xóa hiển thị lỗi
+function cleanError(inputElement) {
   const formGroup = inputElement.parentElement;
+  formGroup.classList.remove("invalid");
   const errorElement = formGroup.querySelector(".form-message");
-  formGroup.classList.add("invalid");
+
   if (errorElement) {
-    errorElement.innerText = message;
+    errorElement.innerText = "";
   }
 }
-// 3.Xử lý Submit Form Đăng Nhập
+
+// 4.Xử lý Submit Form Đăng Nhập
 signinForm.addEventListener("submit", async (event) => {
   event.preventDefault();
   const username = document.getElementById("signin-username").value;
@@ -77,7 +79,10 @@ signupForm.addEventListener("submit", async (event) => {
   ).value;
 
   if (password !== passwordConfirm) {
-    alert("Mật khẩu xác nhận không khớp!");
+    showError(
+      document.getElementById("signup-password-confirm"),
+      "Mật khẩu xác nhận không khớp!",
+    );
     return;
   }
 
@@ -100,4 +105,12 @@ signupForm.addEventListener("submit", async (event) => {
       error.response?.data?.message || "Đăng ký thất bại! Vui lòng thử lại!";
     alert(message);
   }
+});
+
+// Xóa lỗi khi người dùng bắt đầu nhập lại dữ liệu
+const allInput = document.querySelectorAll("input");
+allInput.forEach((input) => {
+  input.addEventListener("input", () => {
+    cleanError(input);
+  });
 });

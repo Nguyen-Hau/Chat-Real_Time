@@ -1,3 +1,4 @@
+import "./logout.js";
 import { authService } from "../services/auth.service.js";
 import { setToken, getToken } from "../axios.js";
 
@@ -13,9 +14,15 @@ async function initChatApp() {
 
     //3.
   } catch (error) {
+    // Thông báo lỗi đăng nhập vào Acc
     console.error("Phiên đăng nhập hết hạn hoặc chưa đăng nhập: ", error);
+
+    // 2. Dọn dẹp sạch sẽ bộ nhớ ở Frontend
+    setToken(null);
+    localStorage.removeItem("currentUser");
+
     alert("Vui lòng đăng nhập để tiếp tục!");
-    window.location.href = "index.html"; // Chuyển về trang đăng nhập nếu gặp các trường hợp
+    window.location.href = "login.html"; // Chuyển về trang đăng nhập nếu login ko thành
   }
 }
 

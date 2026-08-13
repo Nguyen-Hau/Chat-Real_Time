@@ -51,13 +51,14 @@ apiClient.interceptors.response.use(
         originalResquest.headers.Authorization = `Bearer ${newAccessToken}`;
 
         return apiClient(originalResquest);
-      } catch (error) {
+      } catch (refreshError) {
         setToken(null);
-        window.location.href = "index.html";
+        localStorage.removeItem("currentUser");
+        window.location.href = "login.html";
         return Promise.reject(refreshError);
       }
     }
-    return Promise;
+    return Promise.reject(error);
   },
 );
 export default apiClient;

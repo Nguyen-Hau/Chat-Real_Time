@@ -1,0 +1,51 @@
+@import 'theme.css';
+@import './responsive.css';
+
+/* */
+.body {
+    
+}
+
+/*===============
+Thanh điều hướng
+=================*/
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 40px;
+    
+    background: rgba(255, 255, 255, 1);
+    backdrop-filter: blur(10px);
+    box-shadow:  0 2px 10px rgba(0, 0, 0, 0.1);
+    
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+
+.navbar-img {
+    width: 75px;
+    height: 75px;
+    background-image: url('../../assets/logos/logo.png');
+    background-position: center;
+    background-size: cover;
+    flex-shrink: 0;
+    border-radius: 100px;
+    box-shadow: 
+        inset 0px -1px 1px hsla(0, 0%, 100%, 0.5),
+        0 4px 6px -1 hsla(0, 0%, 0%, 0.2),
+        0 2px 4px -2px hsla(0, 0%, 0%, 0.2),
+        inset 0px 1px 3px hsla(0, 0%, 0%, 0.1);
+}
+
+.profile-avatar {
+    width: 45px;
+    height: 45px;
+    background-image: url('../../assets/image/profile.jpg');
+    background-position: center;
+    background-size: cover;
+    border-radius: 100px;
+    border: 2px solid #6c2bd9;
+}

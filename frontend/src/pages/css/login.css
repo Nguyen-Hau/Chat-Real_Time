@@ -1,9 +1,6 @@
 @import 'theme.css';
 @import './theme.css';
-
-* {
-  font-family: 'Inter', sans-serif;
-}
+@import './responsive.css';
 
 body {
   display: flex;
@@ -37,10 +34,6 @@ body {
   display: flex;
   background-color: #ffffff;
   border-radius: 8px;
-}
-
-.auth-card-tab hidden {
-  
 }
 
 /*-------- ABOUT --------*/
@@ -119,13 +112,18 @@ body {
 /*======= SUBMIT =======*/
 .btn-submit {
   width: 100%;
-  color: #ffffff;
   padding: 8px;
-  background-color: var(--primary-color);
+  background: linear-gradient(90deg, #6c2bd9 0%, #8b5cf6 50%, #5b21b6 100%);
+  background-size: 200% auto;
+  color: #ffffff;
   border-radius: 50px;
   border: 1px solid transparent;
   outline: none;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
+}
+
+.btn-submit:hover {
+  background-position: right center;
 }
 
 /*======= IMGAE =======*/
@@ -148,9 +146,29 @@ body {
 
 }
 
+/* Chuyển đổi giữa SignUp & SignIn*/
 .hidden {
   display: none !important;
 }
+
+/* Viền đỏ cho input nằm trong nhóm bị lỗi */
+.form-group.invalid input, 
+.sub-group.invalid input {
+  border-color: #ef4444 !important;
+  box-shadow: 0 0 5px rgba(239, 68, 68, 0.2);
+}
+
+.form-message {
+  font-size: 0.75rem;
+  color: #ef4444;
+  margin-top: 4px;
+  display: block;
+  min-height: 16px;
+  text-align: left;
+  width: 100%;
+}
+
+
 
 /*  chuyển động màu */
 @keyframes gradientMove {
