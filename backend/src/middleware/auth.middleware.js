@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.Model.js";
 
-export const verifyAccessToken = async (request, response, next) => {
+export const authMiddleware = async (request, response, next) => {
   try {
     // Lấy token từ header Authorization
     const authHeader = request.headers.authorization;

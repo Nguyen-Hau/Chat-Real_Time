@@ -3,13 +3,11 @@ import mongoose from "mongoose";
 // người tham gia
 const participantSchema = new mongoose.Schema(
   {
-    // Thông tin thanh viên
     userId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    // Ngày tham gia
     joinedAt: {
       type: Date,
       default: Date.now,
@@ -40,17 +38,14 @@ const groupSchema = new mongoose.Schema(
 const lastMessageSchema = new mongoose.Schema(
   {
     _id: { type: String },
-    // Nội dung
     content: {
       type: String,
       default: null,
     },
-    // Người gửi
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    // Được tạo lúc
     createdAt: {
       type: Date,
       default: null,
@@ -64,36 +59,30 @@ const lastMessageSchema = new mongoose.Schema(
 // Cuộc hội thoại
 const conversationSchame = new mongoose.Schema(
   {
-    // Kiểu
     type: {
       type: String,
       enum: ["direct", "group"],
       trim: true,
     },
-    // người tham gia
     participants: {
       type: participantSchema,
       required: true,
     },
-    // Nhóm
     group: {
       type: groupSchema,
     },
-    // tin nhắn cuối cùng
     lastMessage: {
       type: lastMessageSchema,
       default: null,
     },
-    //
+
     lastMessageAt: {
       type: Date,
     },
-    // Được xem bởi
     seenBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
-    // Số lượng tin chưa đọc
     unreadCounts: {
       type: Map,
       of: Number,
@@ -104,3 +93,8 @@ const conversationSchame = new mongoose.Schema(
     timestamps: true,
   },
 );
+
+conversationSchame.index({ "participant.userId": 1, lastMessageAt: -1 });
+
+const Conversation = mongoose.model("Conversation", conversationSchame);
+export default Conversation;

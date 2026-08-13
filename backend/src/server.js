@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 dotenv.config();
 import { connectionDB } from "./config/mongodb.js";
 import authRoute from "./routers/auth.Routes.js";
+import friendRoute from "./routers/friend.Routes.js";
 
 const app = express();
 app.use(cookieParser());
@@ -24,6 +25,7 @@ app.use(cookieParser());
 
 // public Router
 app.use("/api/auth", authRoute);
+app.use("/api/friends", friendRoute);
 
 // private Router
 
