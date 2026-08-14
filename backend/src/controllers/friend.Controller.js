@@ -5,60 +5,6 @@ import FriendRequest from "../models/friendRequest.Model.js";
 // Xử lý gửi(add) lời mời
 export const addFriendRequest = async (request, response) => {
   try {
-    const { to, message } = response.body;
-    const from = request.user._id;
-
-    if (from === to) {
-      return response.status(400).json({
-        message: "Không thể gửi lời mời kết bạn cho chính mình!",
-      });
-    }
-
-    const toUser = await User.exists({ _id: to });
-    if (!toUser) {
-      return response.status(404).json({
-        message: "Người dùng không tồn tại!",
-      });
-    }
-
-    // Kiểm tra đã là bạn bè hay có lời mời nào chưa
-    let userA = from.toString();
-    let userB = to.toString();
-
-    if (userA > userB) {
-      [userA, userB] = [userB, userA];
-    }
-
-    const [alreadyFriends, existingRequest] = await Promise.all([
-      Friend.findOne({ userA, userB }), // alreadlyFriends truy vấn vào MongoDB: 'Friend'
-      FriendRequest.findOne({
-        // existing Request truy vấn vào MongoDB: 'FriendRequest'
-        $or: [
-          { from, to },
-          { from: to, to: from },
-        ],
-      }),
-    ]);
-
-    if (alreadyFriends) {
-      return response.status(400).json({
-        message: "Hai người đã là bạn bè!",
-      });
-    }
-
-    if (existingRequest) {
-      return response.status(400).json({
-        message: "Đã có lời mời kết bạn đang chờ!",
-      });
-    }
-
-    // Thêm quan hệ ở phía userA - userB
-    const request = await FriendRequest.create({ from, to, message });
-
-    return response.status(200).json({
-      message: "Gửi lời mời kết bạn thành công!",
-      request,
-    });
   } catch (error) {
     console.log("Lỗi khi gửi lời mời kết bạn: " + error);
     return response.status(500).json({
