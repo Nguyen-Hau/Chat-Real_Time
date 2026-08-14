@@ -33,13 +33,13 @@ export const authMiddleware = async (request, response, next) => {
     if (error.name !== "TokenExpiredError") {
       console.error("Lỗi xác thực Token:", error.message);
     }
-    // Tbao Token het han
+    // Thông báo Token hết hạn
     if (error.name === "TokenExpiredError") {
       return response.status(401).json({
         message: "Token đã hết hạn!",
       });
     }
-    // Tbao Token khong hop le
+    // Thông báo Token không hợp lệ
     return response.status(403).json({
       message: "Token không hợp lệ!",
     });
