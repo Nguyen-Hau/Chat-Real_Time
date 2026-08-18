@@ -1,13 +1,13 @@
 import jwt from "jsonwebtoken";
 import User from "../models/user.Model.js";
 
-export const authMiddleware = async (request, response, next) => {
+export const authMiddleware = async (req, res, next) => {
   try {
     // Lấy token từ header Authorization
-    const authHeader = request.headers.authorization;
+    const authHeader = req.headers.authorization;
 
     if (!authHeader || !authHeader.startsWith("Bearer")) {
-      return response.status(401).json({
+      return res.status(401).json({
         message: "Token không hợp lệ hoặc đã hết hạn!",
       });
     }
@@ -20,13 +20,14 @@ export const authMiddleware = async (request, response, next) => {
 
     const user = await User.findById(decoded.userId).select("-password");
     if (!user) {
-      return response.status(404).json({
+      return res.status(404).json({
         message: "Không tìm thấy thông tin người dùng!",
       });
     }
 
     // Gán userId vào request để Controller lấy ra sử dụng
-    request.userId = user;
+    req.user = user;
+
     // Tiếp tục chuyển tiếp cho controller xử lý
     next();
   } catch (error) {
@@ -35,12 +36,12 @@ export const authMiddleware = async (request, response, next) => {
     }
     // Thông báo Token hết hạn
     if (error.name === "TokenExpiredError") {
-      return response.status(401).json({
+      return res.status(401).json({
         message: "Token đã hết hạn!",
       });
     }
     // Thông báo Token không hợp lệ
-    return response.status(403).json({
+    return res.status(403).json({
       message: "Token không hợp lệ!",
     });
   }

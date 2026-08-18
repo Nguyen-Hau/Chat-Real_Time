@@ -21,19 +21,42 @@ body {
   max-width: 850px;
   margin: 0 auto;
   margin-bottom: 18px;
+  position: relative;
+
+  & img {
+    width: 300px;
+    height: auto;
+    position: absolute;
+  }
+
+  & img:nth-child(1) {
+    top: -10%;
+    left: -25%;
+    z-index: 1;
+    animation: float 6s ease-in-out infinite;
+  }
+
+  & img:nth-child(2) {
+    bottom: -10%;
+    right: -25%;
+    animation: float 6s ease-in-out infinite;
+  }
+
 }
 
 .auth-form-content {
   flex: 1;
   width: 100%;
-  padding: 40px 36px;
+  padding: 40px 40px;
 }
 
 /*-------- SignIn/SignUp --------*/
 .auth-card-tab {
   display: flex;
+  width: 830px;
   background-color: #ffffff;
   border-radius: 8px;
+
 }
 
 /*-------- ABOUT --------*/
@@ -43,7 +66,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  gap: 12px;
+  gap: 8px;
   margin-bottom: 24px; /* Giãn khoảng cách giữa header và form */
 }
 
@@ -67,7 +90,7 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 8px;
+  gap: 2px;
 }
 
 .form-group {
@@ -75,7 +98,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 8px;
+  gap: 2px;
 }
 
 .form-group input,
@@ -91,7 +114,9 @@ body {
 .form-group input:focus,
 .sub-group input:focus {
   border-color: rgba(81, 84, 241, 0.5);
-  box-shadow: 0 0 10px rgba(99, 102, 241, 0.2);
+  box-shadow: 
+    0 4px 8px hsla(var(--p-700-code), 0.2),
+    0 2px 4px hsla(var(--p-700-code), 0.3);
 }
 
 .form-fullname {
@@ -104,15 +129,24 @@ body {
 
 /*====== LOGO =======*/
 .auth-logo {
-  width: 84px;
-  height: auto;
+  width: 75px;
+  height: 75px;
+  background-image: url(../../assets/logos/logo.png);
+  background-position: center;
+  background-size: cover;
+  flex-shrink: 0;
+  border-radius: 100px;
   margin-bottom: 5px;
+  border: 1px solid #6c2bd9;
+  box-shadow: 
+    inset 0px -1px 1px hsla(0, 0%, 100%, 0.5);
 }
 
 /*======= SUBMIT =======*/
 .btn-submit {
   width: 100%;
-  padding: 8px;
+  padding: 10px;
+  margin-bottom: 12px;
   background: linear-gradient(90deg, #6c2bd9 0%, #8b5cf6 50%, #5b21b6 100%);
   background-size: 200% auto;
   color: #ffffff;
@@ -120,30 +154,47 @@ body {
   border: 1px solid transparent;
   outline: none;
   transition: all 0.5s ease;
+  &:hover {
+    box-shadow: 
+      0 4px 8px hsla(var(--p-700-code), 0.2),
+      0 2px 4px hsla(var(--p-700-code), 0.3);
+  }
 }
 
 .btn-submit:hover {
   background-position: right center;
 }
 
-/*======= IMGAE =======*/
-.auth-right {
+/*======= IMGAE  =======*/
+.img-right-signin,
+.img-right-signup {
   flex: 1;
 }
 
-.auth-right img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+.img-right-signin {
+  width: 390px;
+  height: 520px;
   border-radius: 0 8px 8px 0;
-  display: block;
+  background-image: url(../../assets/image/signin_bg.png);
+  background-position: center;
+  background-size: cover;
   overflow: hidden;
-  transition: all 0.4s ease-in-out;
+}
+
+.img-right-signup {
+  width: 390px;
+  height: 764px;
+  border-radius: 0 8px 8px 0;
+  background-image: url(../../assets/image/signup_bg_2.jpg);
+  background-position: center;
+  background-size: cover;
+  overflow: hidden;
+  flex-shrink: 0;
 }
 
 /*======= AUTH FOOTER ========*/
 .auth-footer {
-
+  text-align: center;
 }
 
 /* Chuyển đổi giữa SignUp & SignIn*/
@@ -180,5 +231,18 @@ body {
   }
   100% {
     background-position: 0% 50%;
+  }
+}
+
+/*chuyển động rocket - laptp*/
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0);
   }
 }

@@ -8,12 +8,12 @@ const ACCESS_TOKEN_TTL = "15m";
 const REFRESH_TOKEN_TTL = 14 * 24 * 60 * 60 * 1000; // 14 DAY
 
 // Signup / Đăng ký
-export const signup = async (request, response) => {
+export const signup = async (req, res) => {
   try {
-    const { username, password, email, firstName, lastName, phone } =
-      request.body;
+    const { username, password, email, firstName, lastName, phone } = req.body;
+
     if (!username || !password || !email || !firstName || !lastName || !phone) {
-      return response.status(400).json({
+      return res.status(400).json({
         message: "Thông tin nhập bị thiếu. Vui lòng nhập lại!",
       });
     }
@@ -21,7 +21,7 @@ export const signup = async (request, response) => {
     // Ktra user ton tại chưa
     const user = await User.findOne({ username });
     if (user) {
-      return response.status(401).json({
+      return res.status(401).json({
         message: "Tài khoản này đã tồn tại! Vui lòng kiểm tra lại",
       });
     }
@@ -33,26 +33,26 @@ export const signup = async (request, response) => {
       username,
       password: hashPass,
       email,
-      displayName: `${firstName} ${lastName}`,
+      displayName: `${lastName} ${firstName}`,
       phone,
     });
     // return
-    return response.status(201).json({
+    return res.status(201).json({
       message: "Đăng ký thành công tài khoản!",
     });
   } catch (error) {
-    return response.status(500).json({
+    return res.status(500).json({
       message: "Lỗi hệ thống: " + error.message,
     });
   }
 };
 
 // Signin / Đăng nhập
-export const signin = async (request, response) => {
+export const signin = async (req, res) => {
   try {
-    const { username, email, password } = request.body;
+    const { username, email, password } = req.body;
     if ((!username && !email) || !password) {
-      return response.status(400).json({
+      return res.status(400).json({
         message: "Vui lòng nhập tài khoản hoặc mật khẩu!",
       });
     }
@@ -62,14 +62,14 @@ export const signin = async (request, response) => {
     });
 
     if (!user) {
-      return response.status(404).json({
+      return res.status(404).json({
         message: "Tài khoản và mật khẩu không chính xác!",
       });
     }
     // Kiểm tra password
     const isMatch = await comparePassword(password, user.password);
     if (!isMatch) {
-      return response.status(400).json({
+      return res.status(400).json({
         message: "Tài khoản hoặc mật khẩu không chính xác!",
       });
     }
@@ -92,7 +92,7 @@ export const signin = async (request, response) => {
     });
 
     // Trả refreshToken về Client qua cookie // Tạo cookie
-    response.cookie("refreshToken", refreshToken, {
+    res.cookie("refreshToken", refreshToken, {
       httpOnly: true, // Ko thể truy cập bởi JVS
       secure: false, // Đảm bảo gửi qua https
       sameSite: "lax", // BE & FE chạy trên 2 domain khác nhau
@@ -100,7 +100,7 @@ export const signin = async (request, response) => {
     });
 
     // 4.
-    return response.status(200).json({
+    return res.status(200).json({
       message: "Đăng nhập thành công!",
       accessToken,
       user: {
@@ -112,43 +112,43 @@ export const signin = async (request, response) => {
       },
     });
   } catch (error) {
-    return response.status(500).json({
+    return res.status(500).json({
       message: "Lỗi hệ thống: " + error.message,
     });
   }
 };
 
 // Logout/ Xóa refreshToken
-export const logout = async (request, response) => {
+export const logout = async (req, res) => {
   try {
     // 1. lấy refreshToken từ cookie của resquest
-    const refreshToken = request.cookies?.refreshToken;
+    const refreshToken = req.cookies?.refreshToken;
     //2. Nếu có refreshToken trong database thì thực hiện delete
     if (refreshToken) {
       await Session.deleteOne({ refreshToken });
     }
     // 3. cũng delete refreshToken trên client
-    response.clearCookie("refreshToken", {
+    res.clearCookie("refreshToken", {
       httpOnly: true,
       secure: true,
       sameSite: "lax",
     });
 
-    return response.status(200).json({ message: "Đăng xuất thành công" });
+    return res.status(200).json({ message: "Đăng xuất thành công" });
   } catch (error) {
-    return response.status(500).json({
+    return res.status(500).json({
       message: "Lỗi hệ thống khi đăng xuất: " + error.message,
     });
   }
 };
 
 // Cấp lại Token
-export const refreshToken = async (request, response) => {
+export const refreshToken = async (req, res) => {
   try {
-    const refreshToken = request.cookies?.refreshToken;
+    const refreshToken = req.cookies?.refreshToken;
 
     if (!refreshToken) {
-      return response.status(401).json({
+      return res.status(401).json({
         success: false,
         message: "Bạn chưa đăng nhập hoặc không tìm thấy Refresh Token!",
       });
@@ -158,7 +158,7 @@ export const refreshToken = async (request, response) => {
     const session = await Session.findOne({ refreshToken });
 
     if (!session || new Date(session.expiresAt).getTime() <= Date.now()) {
-      return response.status(403).json({
+      return res.status(403).json({
         success: false,
         message:
           "Phiên đăng nhập không hợp lệ hoặc đã hết hạn. Vui lòng đăng nhập lại!",
@@ -173,13 +173,13 @@ export const refreshToken = async (request, response) => {
     );
 
     // 5. Trả AccessToken mới về cho Client
-    return response.status(200).json({
+    return res.status(200).json({
       success: true,
       message: "Cấp lại AccessToken thành công!",
       accessToken,
     });
   } catch (error) {
-    return response.status(500).json({
+    return res.status(500).json({
       success: false,
       message: "Lỗi hệ thống: " + error.message,
     });

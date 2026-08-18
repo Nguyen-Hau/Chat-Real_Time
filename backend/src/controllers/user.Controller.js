@@ -1,25 +1,25 @@
 // Get getfile
-export const profile = async (request, response) => {
+export const profile = async (req, res) => {
   try {
-    const user = request.userId;
+    const user = req.userId;
 
-    return response.status(200).json({
+    return res.status(200).json({
       message: "Lấy thông tin Profile thành công!",
       user,
     });
   } catch (error) {
     console.error("Lỗi khi gọi Profile: ", error);
-    return response.status(500).json({
+    return res.status(500).json({
       message: "Lỗi lấy Profile:" + error.message,
     });
   }
 };
 
 // Lấy danh sách người dùng
-export const idUser = async (request, response) => {};
+export const idUser = async (req, res) => {};
 
 // Sửa Người dùng
-export const deleteUser = async (request, response) => {
+export const deleteUser = async (req, res) => {
   try {
   } catch (error) {}
 };

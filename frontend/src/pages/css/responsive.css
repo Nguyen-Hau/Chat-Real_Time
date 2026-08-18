@@ -6,9 +6,9 @@
 /* *=================
     Desktop
 =================* */
-@media (max-width: 1536px) {
+@media (max-width: 1880px) {
     .container {
-        max-width: 1440px;
+        max-width: 1750px;
     }
 }
 
@@ -26,13 +26,39 @@
         max-width: 1024px;
     }
 
+    .auth-container {
+        margin: 80px auto;
+
+        & img {
+            display: none;
+        }
+    }
+
     .auth-card-tab {
         flex-direction: column;
     }
 
     /*Ẩn phần ảnh minh họa bên phải để nhường không gian cho Form */
-    .auth-right {
+    .img-right-signin,
+    .img-right-signup {
         display: none;
+    }
+}
+
+/* *=================
+    Laptop & Tablet
+=================* */
+@media (max-width: 920px) {
+    .auth-container {
+        margin: 80px auto;
+
+        & img {
+            display: none;
+        }
+    }
+
+    .auth-foote {
+        text-align: center;
     }
 }
 

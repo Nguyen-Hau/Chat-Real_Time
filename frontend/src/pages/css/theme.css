@@ -49,8 +49,22 @@ table {
     --card-bg: #ffffff;
     --text-color: #1f2937;
     --text-muted: #6b7280;
+    /*border-radius / box-shadow*/
     --border-color: #e5e7eb;
+    --p-500: hsl(228, 81%, 63%);
+    --p-500-code: 228, 81%, 63%;
+    --p-600: hsl(233, 73%, 59%);
+    --p-600-code: 233, 73%, 59%;
+    --p-700: hsl(234, 56%, 51%);
+    --p-700-code: 234, 56%, 51%;
+    --p-800: hsl(233, 53%, 41%);
+    --p-900: hsl(231, 46%, 34%);
+    --p-900-code: 231, 46%, 34%;
+    --p-950: hsl(233, 45%, 20%);
+    --p-950-code: 233, 45%, 20%;
+
     --input-bg: #f9fafb;
+
     --radius-lg: 16px;
     --radius-sm: 8px;
 
