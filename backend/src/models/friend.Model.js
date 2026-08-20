@@ -18,15 +18,14 @@ const friendSchema = new mongoose.Schema(
   },
 );
 
-friendSchema.pre("save", function (next) {
+friendSchema.pre("save", function () {
   const a = this.UserA.toString();
   const b = this.UserB.toString();
 
   if (a > b) {
-    this.UserA = new mongoose.Schema.Types.ObjectId(b);
-    this.UserB = new mongoose.Schema.Types.ObjectId(a);
+    this.UserA = new mongoose.Types.ObjectId(b);
+    this.UserB = new mongoose.Types.ObjectId(a);
   }
-  next();
 });
 
 friendSchema.index({ userAd: 1, userBd: 1 }, { unique: true });

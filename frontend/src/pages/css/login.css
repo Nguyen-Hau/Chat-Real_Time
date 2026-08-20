@@ -53,9 +53,11 @@ body {
 /*-------- SignIn/SignUp --------*/
 .auth-card-tab {
   display: flex;
-  width: 830px;
+  width: 100%;
+  max-width: 830px;
   background-color: #ffffff;
   border-radius: 8px;
+  overflow: hidden;
 
 }
 
@@ -183,7 +185,7 @@ body {
 
 .img-right-signup {
   width: 390px;
-  height: 764px;
+  height: 785px;
   border-radius: 0 8px 8px 0;
   background-image: url(../../assets/image/signup_bg_2.jpg);
   background-position: center;
