@@ -2,11 +2,15 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors";
 import cookieParser from "cookie-parser";
-dotenv.config();
+
+// Connect Database
 import { connectionDB } from "./config/mongodb.js";
+// Router
 import authRoute from "./routers/auth.Routes.js";
 import friendRoute from "./routers/friend.Routes.js";
+import messageRouter from "./routers/message.Router.js";
 
+dotenv.config();
 const app = express();
 app.use(cookieParser());
 
@@ -14,7 +18,7 @@ app.use(cookieParser());
 // Cho phép Vite FE gọi API
 app.use(
   cors({
-    origin: "http://localhost:5173", // Cho phép Frontend Vite kết nối
+    origin: process.env.CLIENT_URL, // Cho phép Frontend Vite kết nối
     credentials: true, // cho phép trình duyệt gửi cookie, cần cho refreshToken
   }),
 );
@@ -26,9 +30,11 @@ app.use(cookieParser());
 // public Router
 app.use("/api/auth", authRoute);
 app.use("/api/friends", friendRoute);
+app.use("/api/messages", messageRouter);
 
 // private Router
 
+// Port Connect Database 5001
 const PORT = process.env.PORT || 5001;
 app.listen(PORT, async () => {
   console.log("===================================");
