@@ -220,7 +220,7 @@ export const getFriendRequest = async (req, res) => {
   try {
     const userId = req.user._id;
 
-    const dataFields = "id username displayName avatarUrl";
+    const dataFields = "_id username displayName avatarUrl";
     const [send, received] = await Promise.all([
       FriendRequest.find({ from: userId }).populate("to", dataFields),
       FriendRequest.find({ to: userId }).populate("from", dataFields),

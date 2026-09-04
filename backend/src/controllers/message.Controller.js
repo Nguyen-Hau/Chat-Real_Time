@@ -1,4 +1,3 @@
-import mongoose from "mongoose";
 import Conversation from "../models/conversation.Model.js";
 import Message from "../models/message.Model.js";
 import { updateConversationAfterCreateMessage } from "../utils/messageHelper.js";
@@ -8,7 +7,7 @@ export const sendDirectMessage = async (req, res) => {
     const { recipientId, connent, conversationId } = req.body;
     const senderId = req.user._id;
 
-    let conversation;
+    let conversation; // tạo biến hội thoại
 
     if (!connent) {
       return res.status(400).json({ message: "Thiếu nội dung!" });
