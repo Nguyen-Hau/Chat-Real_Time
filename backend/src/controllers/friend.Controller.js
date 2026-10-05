@@ -3,7 +3,7 @@ import Friend from "../models/friend.Model.js";
 import FriendRequest from "../models/friendRequest.Model.js";
 
 // Xử lý gửi(add) lời mời
-export const addFriendRequest = async (req, res) => {
+export const addFriend = async (req, res) => {
   try {
     const { to, message } = req.body;
     const from = req.user._id;
@@ -29,7 +29,7 @@ export const addFriendRequest = async (req, res) => {
     }
 
     const [alreadyFriends, existingRequest] = await Promise.all([
-      Friend.findOne({ UserA: userA, UserB: userB }),
+      Friend.findOne({ userA: userA, userB: userB }),
       FriendRequest.findOne({
         $or: [
           { from, to },
@@ -87,8 +87,8 @@ export const acceptFriendRequest = async (req, res) => {
 
     // Thêm quan hệ bạn bè
     await Friend.create({
-      UserA: request.from,
-      UserB: request.to,
+      userA: request.from,
+      userB: request.to,
     });
 
     // tìm đến id gửi lời mời và từ chối
@@ -146,8 +146,8 @@ export const declineFriendRequest = async (req, res) => {
   }
 };
 
-// Xử lý xóa(remove) kết bạn
-export const removeFriend = async (req, res) => {
+// Xử lý hủy(unfriend) kết bạn
+export const unFriend = async (req, res) => {
   try {
     const { friendId } = req.params;
     const userId = req.user._id;
@@ -169,12 +169,12 @@ export const removeFriend = async (req, res) => {
     if (userA > userB) {
       [userA, userB] = [userB, userA];
     }
-    const removeFriend = await Friend.findOneAndDelete({
-      UserA: userA,
-      UserB: userB,
+    const unFriend = await Friend.findOneAndDelete({
+      userA: userA,
+      userB: userB,
     });
 
-    if (!removeFriend) {
+    if (!unFriend) {
       return res.status(404).json({
         message: "Hai người chưa phải bạn bè!",
       });
@@ -191,16 +191,16 @@ export const removeFriend = async (req, res) => {
 };
 
 // Xử lý việc lấy danh sách bạn bè TK
-export const getAllFriend = async (req, res) => {
+export const getAllFriends = async (req, res) => {
   try {
     const userId = req.user._id;
 
-    const dataFields = "id username email displayName phone avatarUrl";
+    const populateFields = "id username email displayName phone avatarUrl";
     const allFriends = await Friend.find({
       $or: [{ UserA: userId }, { UserB: userId }],
     })
-      .populate("UserA", dataFields)
-      .populate("UserB", dataFields)
+      .populate("UserA", populateFields)
+      .populate("UserB", populateFields)
       .lean();
 
     return res.status(200).json({
@@ -216,17 +216,19 @@ export const getAllFriend = async (req, res) => {
 };
 
 //Lấy danh sách yêu cầu kết bạn
-export const getFriendRequest = async (req, res) => {
+export const getFriendsRequest = async (req, res) => {
   try {
     const userId = req.user._id;
 
-    const dataFields = "_id username displayName avatarUrl";
-    const [send, received] = await Promise.all([
-      FriendRequest.find({ from: userId }).populate("to", dataFields),
-      FriendRequest.find({ to: userId }).populate("from", dataFields),
+    // chứa danh sách các trường muốn lấy.
+    const populateFields = "_id username displayName avatarUrl";
+
+    const [sent, received] = await Promise.all([
+      FriendRequest.find({ from: userId }).populate("to", populateFields),
+      FriendRequest.find({ to: userId }).populate("from", populateFields),
     ]);
 
-    return res.status(200).json({ send, received });
+    return res.status(200).json({ sent, received });
   } catch (error) {
     console.log("Lỗi khi lấy danh sách yêu cầu kết bạn: ", error);
     return res.status(500).json({

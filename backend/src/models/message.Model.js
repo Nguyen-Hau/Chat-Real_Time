@@ -6,7 +6,7 @@ export const messageSchema = new mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Conversation",
       required: true, // Bắt buộc phải có
-      index: true, // Tối ưu tốc độ truy vấn khi truyền tin nhắn
+      // index: true,  Tối ưu tốc độ truy vấn khi truyền tin nhắn
     },
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
@@ -26,6 +26,8 @@ export const messageSchema = new mongoose.Schema(
   },
 );
 
+// 1 tăng dần , -1 giảm dần
+// tạo ra 1 bảng tra cứu sx theo conversationID, createdAt
 messageSchema.index({ conversationId: 1 }, { createdAt: -1 });
 
 const Message = mongoose.model("Message", messageSchema);

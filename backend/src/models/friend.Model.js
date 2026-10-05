@@ -2,13 +2,13 @@ import mongoose from "mongoose";
 
 const friendSchema = new mongoose.Schema(
   {
-    UserA: {
-      type: mongoose.Schema.ObjectId,
+    userA: {
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
-    UserB: {
-      type: mongoose.Schema.ObjectId,
+    userB: {
+      type: mongoose.Schema.Types.ObjectId,
       ref: "User",
       required: true,
     },
@@ -19,16 +19,19 @@ const friendSchema = new mongoose.Schema(
 );
 
 friendSchema.pre("save", function () {
-  const a = this.UserA.toString();
-  const b = this.UserB.toString();
+  if (!this.userA || !this.userB) return;
+
+  const a = this.userA.toString();
+  const b = this.userB.toString();
 
   if (a > b) {
-    this.UserA = new mongoose.Types.ObjectId(b);
-    this.UserB = new mongoose.Types.ObjectId(a);
+    this.userA = new mongoose.Types.ObjectId(b);
+    this.userB = new mongoose.Types.ObjectId(a);
   }
 });
 
-friendSchema.index({ userAd: 1, userBd: 1 }, { unique: true });
+// tạo index đọc nhất cho cặp userA và userB
+friendSchema.index({ userA: 1, userB: 1 }, { unique: true });
 const Friend = mongoose.model("Friend", friendSchema);
 
 export default Friend;

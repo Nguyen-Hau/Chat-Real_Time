@@ -8,6 +8,7 @@ const participantSchema = new mongoose.Schema(
       ref: "User",
       required: true,
     },
+
     joinedAt: {
       type: Date,
       default: Date.now,
@@ -24,9 +25,17 @@ const groupSchema = new mongoose.Schema(
       type: String,
       trim: true,
     },
+
     createBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+    },
+    // Thêm thông tin cho nhóm, ảnh đại diện(ảnh nền)
+    groupIMG: {
+      type: String,
+    },
+    groupInfor: {
+      type: String,
     },
   },
   {
@@ -42,10 +51,12 @@ const lastMessageSchema = new mongoose.Schema(
       type: String,
       default: null,
     },
+
     senderId: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+
     createdAt: {
       type: Date,
       default: null,
@@ -62,31 +73,36 @@ const conversationSchame = new mongoose.Schema(
     type: {
       type: String,
       enum: ["direct", "group"],
-      trim: true,
-    },
-    participants: {
-      type: participantSchema,
       required: true,
     },
+
+    participants: {
+      type: [participantSchema],
+      required: true,
+    },
+
     group: {
       type: groupSchema,
     },
+
     lastMessage: {
       type: lastMessageSchema,
       default: null,
     },
-
+    // lưu tg mess cuối trong hội thoại
     lastMessageAt: {
       type: Date,
     },
+    // ds trường ai đã đọc tin nhắn
     seenBy: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
     },
+
     unreadCounts: {
       type: Map,
       of: Number,
-      ref: "User",
+      default: {},
     },
   },
   {

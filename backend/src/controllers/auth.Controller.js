@@ -56,6 +56,7 @@ export const signin = async (req, res) => {
         message: "Vui lòng nhập tài khoản hoặc mật khẩu!",
       });
     }
+
     // 1 . Kiểm tra username
     const user = await User.findOne({
       $or: [{ username: username }, { email: username }],

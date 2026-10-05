@@ -2,6 +2,7 @@ import Conversation from "../models/conversation.Model.js";
 import Message from "../models/message.Model.js";
 import { updateConversationAfterCreateMessage } from "../utils/messageHelper.js";
 
+// Thiết kế giao tiếp 1-1
 export const sendDirectMessage = async (req, res) => {
   try {
     const { recipientId, connent, conversationId } = req.body;
@@ -49,7 +50,14 @@ export const sendDirectMessage = async (req, res) => {
   }
 };
 
+// Thiết kế giao tiếp nhóm
 export const sendGroupMessage = async (req, res) => {
+  try {
+  } catch (error) {}
+};
+
+// Xóa tin nhắn
+export const removeMessage = async (req, res) => {
   try {
   } catch (error) {}
 };
