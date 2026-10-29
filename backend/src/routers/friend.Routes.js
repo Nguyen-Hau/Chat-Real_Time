@@ -5,7 +5,7 @@ import {
   unFriend,
   declineFriendRequest,
   getAllFriends,
-  getFriendsRequest,
+  getFriendRequest,
 } from "../controllers/friend.Controller.js";
 import { authMiddleware } from "../middleware/auth.middleware.js";
 
@@ -25,7 +25,7 @@ router.post(
 router.delete("/:friendId/unfriend", authMiddleware, unFriend);
 
 // Lấy danh sách lời mời kết bạn
-router.get("/request", authMiddleware, getFriendsRequest);
+router.get("/request", authMiddleware, getFriendRequest);
 // Lấy danh sách bạn bè
 router.get("/", authMiddleware, getAllFriends);
 

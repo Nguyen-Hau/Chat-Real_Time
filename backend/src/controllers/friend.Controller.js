@@ -216,7 +216,7 @@ export const getAllFriends = async (req, res) => {
 };
 
 //Lấy danh sách yêu cầu kết bạn
-export const getFriendsRequest = async (req, res) => {
+export const getFriendRequest = async (req, res) => {
   try {
     const userId = req.user._id;
 

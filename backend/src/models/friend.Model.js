@@ -18,6 +18,7 @@ const friendSchema = new mongoose.Schema(
   },
 );
 
+// Chuẩn hóa kết bạn giữa A và B
 friendSchema.pre("save", function () {
   if (!this.userA || !this.userB) return;
 
