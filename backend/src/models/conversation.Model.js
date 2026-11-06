@@ -94,10 +94,12 @@ const conversationSchame = new mongoose.Schema(
       type: Date,
     },
     // ds trường ai đã đọc tin nhắn
-    seenBy: {
-      type: mongoose.Schema.Types.ObjectId,
-      ref: "User",
-    },
+    seenBy: [
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "User",
+      },
+    ],
 
     unreadCounts: {
       type: Map,

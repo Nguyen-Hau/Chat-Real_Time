@@ -7,26 +7,20 @@ import {
   getAllFriends,
   getFriendRequest,
 } from "../controllers/friend.Controller.js";
-import { authMiddleware } from "../middleware/auth.middleware.js";
 
 const router = express.Router();
 
 // Gửi kết bạn
-router.post("/request", authMiddleware, addFriend);
+router.post("/request", addFriend);
 // Chấp nhận kết bạn
-router.post("/request/:requestId/accept", authMiddleware, acceptFriendRequest);
+router.post("/request/:requestId/accept", acceptFriendRequest);
 // Từ chối kết bạn
-router.post(
-  "/request/:requestId/decline",
-  authMiddleware,
-  declineFriendRequest,
-);
+router.post("/request/:requestId/decline", declineFriendRequest);
 // Hủy kết bạn
-router.delete("/:friendId/unfriend", authMiddleware, unFriend);
-
+router.delete("/:friendId/unfriend", unFriend);
 // Lấy danh sách lời mời kết bạn
-router.get("/request", authMiddleware, getFriendRequest);
+router.get("/request", getFriendRequest);
 // Lấy danh sách bạn bè
-router.get("/", authMiddleware, getAllFriends);
+router.get("/", getAllFriends);
 
 export default router;

@@ -1,5 +1,4 @@
 import express from "express";
-import { authMiddleware } from "../middleware/auth.middleware.js";
 import {
   signup,
   signin,
@@ -17,8 +16,8 @@ router.post("/logout", logout);
 router.post("/refresh-token", refreshToken);
 
 // userRouter
-router.get("/profile", authMiddleware, profile); // Lấy thông tin người dùng
-router.get("/user", authMiddleware, idUser); // Lấy danh sách người dùng
-router.delete("/user/:id", authMiddleware, deleteUser); // Xóa người dùng
+router.get("/profile", profile); // Lấy thông tin người dùng
+router.get("/user", idUser); // Lấy danh sách người dùng
+router.delete("/user/:id", deleteUser); // Xóa người dùng
 
 export default router;

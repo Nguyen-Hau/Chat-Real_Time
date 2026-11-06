@@ -9,6 +9,7 @@ import { connectionDB } from "./config/mongodb.js";
 import authRoute from "./routers/auth.Routes.js";
 import friendRoute from "./routers/friend.Routes.js";
 import messageRouter from "./routers/message.Router.js";
+import { authMiddleware } from "./middleware/auth.middleware.js";
 
 dotenv.config();
 const app = express();
@@ -28,6 +29,8 @@ app.use(cookieParser());
 
 // public Router
 app.use("/api/auth", authRoute);
+
+app.use(authMiddleware);
 app.use("/api/friends", friendRoute);
 app.use("/api/messages", messageRouter);
 
