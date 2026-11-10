@@ -1,7 +1,7 @@
 // Get getfile
 export const profile = async (req, res) => {
   try {
-    const user = req.userId;
+    const user = req.user;
 
     return res.status(200).json({
       message: "Lấy thông tin Profile thành công!",

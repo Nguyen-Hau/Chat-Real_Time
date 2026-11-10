@@ -5,11 +5,13 @@ import cors from "cors";
 import cookieParser from "cookie-parser";
 // Connect Database
 import { connectionDB } from "./config/mongodb.js";
+import { authMiddleware } from "./middleware/auth.middleware.js";
 // Router
 import authRoute from "./routers/auth.Routes.js";
+import userRouter from "./routers/user.Router.js";
 import friendRoute from "./routers/friend.Routes.js";
 import messageRouter from "./routers/message.Router.js";
-import { authMiddleware } from "./middleware/auth.middleware.js";
+import conversationRouter from "./routers/conversation.Routes.js";
 
 dotenv.config();
 const app = express();
@@ -31,8 +33,10 @@ app.use(cookieParser());
 app.use("/api/auth", authRoute);
 
 app.use(authMiddleware);
+app.use("/api/user", userRouter);
 app.use("/api/friends", friendRoute);
 app.use("/api/messages", messageRouter);
+app.use("/api/conversation", conversationRouter);
 
 // private Router
 
